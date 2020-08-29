@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tabs_names">
+        <item>@string/learning_leaders</item>
+        <item>@string/iq_leaders</item>
+    </string-array>
+    <string name="learning_leaders">Learning Leaders</string>
+    <string name="iq_leaders">Skill IQ Leaders</string>
+</resources>

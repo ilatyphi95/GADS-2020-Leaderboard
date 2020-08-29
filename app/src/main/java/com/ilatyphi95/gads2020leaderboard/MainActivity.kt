@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToLeaderBoard() {
         startActivity(Intent(this, LeaderBoardActivity::class.java))
+        finish()
     }
 
     private suspend fun startCountDown(counter: MutableLiveData<Int>) {
