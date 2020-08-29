@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GADS 2020 Leaderboard</string>
+    <string name="skip_in_second">Skip in %d</string>
+    <string name="GADS_logo">GADS logo</string>
 </resources>
