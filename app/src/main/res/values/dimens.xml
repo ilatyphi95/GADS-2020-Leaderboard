@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="card_height">96dp</dimen>
+    <dimen name="large_margin">32dp</dimen>
+    <dimen name="normal_icon">64dp</dimen>
+    <dimen name="larger_icon">80dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="tiny_padding">4dp</dimen>
 </resources>
