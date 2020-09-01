@@ -20,7 +20,7 @@ class CollectorAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
             putInt(
                 ARG_OBJECT,
                 when (position) {
-                    0, 1 -> (position + 1)
+                      0, 1 -> position
                     else -> 0
                 }
             )

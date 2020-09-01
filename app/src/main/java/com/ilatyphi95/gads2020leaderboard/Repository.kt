@@ -4,7 +4,8 @@ import kotlinx.coroutines.delay
 
 class Repository : IRepository {
     override suspend fun getTopLearners(): List<Leader> {
-        delay(1000)
+        // simulate fetching data
+        delay(2000)
 
         val toMutableList = generateLeaders().toMutableList()
         toMutableList.removeAt(1)
@@ -13,7 +14,8 @@ class Repository : IRepository {
     }
 
     override suspend fun getTopSkills(): List<Leader> {
-        delay(1500)
+        // simulate fetching data
+        delay(500)
         return generateLeaders()
     }
 }

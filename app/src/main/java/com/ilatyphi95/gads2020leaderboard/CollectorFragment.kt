@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ilatyphi95.gads2020leaderboard.databinding.FragmentCollectorBinding
 
-class CollectorFragment : Fragment() {
+class CollectorFragment() : Fragment() {
     lateinit var binding: FragmentCollectorBinding
+
     val stringArray by lazy {
         resources.getStringArray(R.array.tabs_names)
     }
