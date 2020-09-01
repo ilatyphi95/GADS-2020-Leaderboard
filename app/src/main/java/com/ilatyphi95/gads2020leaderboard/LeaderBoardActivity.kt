@@ -13,6 +13,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_leader_board)
 
         val leaderViewModelFactory = LeaderViewModelFactory(CloudRepository(RetrofitBuilder.service))
+//        val leaderViewModelFactory = LeaderViewModelFactory(Repository())
 
         viewModel = ViewModelProvider(this, leaderViewModelFactory)
             .get(LeaderViewModel::class.java)

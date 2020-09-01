@@ -8,4 +8,4 @@ data class LearningLeader(
 )
 
 fun LearningLeader.toLeader() = Leader( this.name,
-    desc = "${this.hours} learning hours, ${this.country}")
+    desc = "${this.hours} learning hours, ${this.country}", this.badgeUrl)

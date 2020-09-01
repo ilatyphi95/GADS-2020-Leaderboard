@@ -33,14 +33,17 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/larger_icon"
+                android:layout_marginLeft="@dimen/large_margin"
                 android:layout_marginEnd="@dimen/small_margin"
                 android:layout_marginRight="@dimen/small_margin"
                 android:contentDescription="@string/top_skill_iq_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/skill_iq_foreground" />
+                app:loadImage="@{leader.imgUrl}"
+                android:layout_marginStart="@dimen/large_margin" />
 
             <TextView
                 android:id="@+id/tv_name"

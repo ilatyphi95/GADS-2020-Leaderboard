@@ -39,7 +39,7 @@
                 android:contentDescription="@string/top_learner_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:srcCompat="@mipmap/top_learner_foreground" />
+                app:loadImage="@{leader.imgUrl}"/>
 
             <TextView
                 android:id="@+id/tv_name"

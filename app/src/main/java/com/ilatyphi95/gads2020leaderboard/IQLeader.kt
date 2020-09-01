@@ -8,4 +8,4 @@ data class IQLeader(
 )
 
 fun IQLeader.toLeader() = Leader(this.name,
-    desc = "${this.score} skill IQ Score, ${this.country}")
+    desc = "${this.score} skill IQ Score, ${this.country}", this.badgeUrl)

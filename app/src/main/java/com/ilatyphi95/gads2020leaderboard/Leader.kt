@@ -1,6 +1,6 @@
 package com.ilatyphi95.gads2020leaderboard
 
-data class Leader(val name: String, val desc: String) : RecyclerItemComparator {
+data class Leader(val name: String, val desc: String, val imgUrl: String) : RecyclerItemComparator {
     override fun isSameItem(other: Any): Boolean {
         if(this == other) return true
         if(javaClass != other.javaClass) return false
@@ -27,11 +27,3 @@ fun Leader.toLearningLeader() = RecyclerItem(
     variableId = BR.leader,
     layoutId = R.layout.top_learner_item
 )
-
-fun generateLeaders() : List<Leader> {
-    return listOf(
-        Leader("Ahmed Hani", "Score 300, from Egypt"),
-        Leader("Sulaiman Holo", "Score 299, from Algeria"),
-        Leader("John Doe", "Score 299, from Nigeria")
-    )
-}
