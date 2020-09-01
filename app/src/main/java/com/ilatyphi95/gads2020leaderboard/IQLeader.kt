@@ -6,3 +6,6 @@ data class IQLeader(
     val country: String,
     val badgeUrl: String
 )
+
+fun IQLeader.toLeader() = Leader(this.name,
+    desc = "${this.score} skill IQ Score, ${this.country}")

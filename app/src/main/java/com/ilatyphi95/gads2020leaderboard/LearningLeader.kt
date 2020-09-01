@@ -6,3 +6,6 @@ data class LearningLeader(
     val country: String,
     val badgeUrl: String
 )
+
+fun LearningLeader.toLeader() = Leader( this.name,
+    desc = "${this.hours} learning hours, ${this.country}")
