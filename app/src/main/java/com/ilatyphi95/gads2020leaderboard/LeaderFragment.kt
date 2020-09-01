@@ -28,33 +28,21 @@ class LeaderFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val recycler = binding.recycler
-        arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
-            val viewType = getInt(ARG_OBJECT)
 
+        val recycler = binding.recycler
+
+        arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
+
+            val viewType = getInt(ARG_OBJECT)
             val adapter = UniversalListAdapter()
 
-            viewModel.apply {
-                binding.viewmodel = this
+            binding.viewmodel = viewModel
 
-                learningList.observe(viewLifecycleOwner, { list ->
-                    if(viewType == 0) {
-                        adapter.submitList(list)
-                    }
-                })
-
-                iqList.observe(viewLifecycleOwner, { list ->
-                    if(viewType == 1) {
-                        adapter.submitList(list)
-                    }
-                })
-
-            }
             recycler.adapter = adapter
 
             when(viewType) {
-                0 -> adapter.submitList(viewModel.learningList.value)
-                1 -> adapter.submitList(viewModel.iqList.value)
+                0 -> viewModel.changeToLearning()
+                1 -> viewModel.changeToSkill()
             }
         }
     }

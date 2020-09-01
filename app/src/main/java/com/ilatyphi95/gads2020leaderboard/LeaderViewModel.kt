@@ -2,27 +2,41 @@ package com.ilatyphi95.gads2020leaderboard
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
+import java.lang.Exception
 import java.lang.IllegalArgumentException
 
 class LeaderViewModel(private val leaders: IRepository) : ViewModel(){
 
     private val uiScope = CoroutineScope(Job() + Dispatchers.Main)
 
-    private val _learningList = MutableLiveData<List<RecyclerItem>>()
-    val learningList : LiveData<List<RecyclerItem>>
-        get() = _learningList
+    private var _resources = MutableLiveData<Resource<List<RecyclerItem>?>>()
+    val resources : LiveData<Resource<List<RecyclerItem>?>>
+        get() = _resources
 
-    private val _iqList = MutableLiveData<List<RecyclerItem>>()
-    val iqList : LiveData<List<RecyclerItem>>
-        get() = _iqList
-
-    fun loadList() {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                _learningList.postValue(leaders.getTopLearners().map { it.toLearningLeader()})
-                _iqList.postValue(leaders.getTopSkills().map { it.toSkillsLeader()})
-            }
+    private val learningLeadersResource = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = leaders.getTopLearners().map { it.toLearningLeader() }))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
+    }
+
+    private val skillLeadersResource = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = leaders.getTopSkills().map { it.toSkillsLeader() }))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun changeToLearning() {
+        _resources = learningLeadersResource as MutableLiveData<Resource<List<RecyclerItem>?>>
+    }
+
+    fun changeToSkill() {
+        _resources = skillLeadersResource as MutableLiveData<Resource<List<RecyclerItem>?>>
     }
 
     override fun onCleared() {
