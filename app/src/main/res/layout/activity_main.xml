@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginBottom="@dimen/margin_normal"
         android:text="@string/skip_in_second"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

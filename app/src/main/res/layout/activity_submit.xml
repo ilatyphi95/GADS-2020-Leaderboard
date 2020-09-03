@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/margin_normal"
         android:text="@string/project_submission"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorSecondary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.458"

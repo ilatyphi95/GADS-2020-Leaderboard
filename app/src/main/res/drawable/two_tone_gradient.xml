@@ -15,7 +15,7 @@
                 android:centerColor="#333333"
                 android:endColor="#000000"/>
         </shape>
-        </>
+        </rotate>
     </item>
     <item>
         <rotate

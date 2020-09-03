@@ -5,7 +5,7 @@
     <corners android:radius="@dimen/margin_normal"/>
     <stroke
         android:width="@dimen/tiny_padding"
-        android:color="@color/colorPrimaryDark"/>
+        android:color="@color/colorSecondaryDark"/>
     <padding
         android:top="@dimen/small_margin"
         android:bottom="@dimen/small_margin"

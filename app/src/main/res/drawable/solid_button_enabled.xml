@@ -3,9 +3,9 @@
     android:shape="rectangle">
     <gradient
         android:angle="0"
-        android:endColor="@color/colorPrimary"
-        android:centerColor="@color/colorPrimary"
-        android:startColor="@color/colorPrimaryLight"/>
+        android:endColor="@color/colorSecondary"
+        android:centerColor="@color/colorSecondary"
+        android:startColor="@color/colorSecondaryLight"/>
 
     <corners android:radius="@dimen/big_button_radius"/>
 
