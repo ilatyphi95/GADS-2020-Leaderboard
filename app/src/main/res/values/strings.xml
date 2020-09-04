@@ -11,4 +11,7 @@
     <string name="project_link">Project on GITHUB (link)</string>
     <string name="submit">Submit</string>
     <string name="submit_form">Submit Form</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="learning_leaders">Learning Leaders</string>
+    <string name="iq_leaders">Skill IQ Leaders</string>
 </resources>

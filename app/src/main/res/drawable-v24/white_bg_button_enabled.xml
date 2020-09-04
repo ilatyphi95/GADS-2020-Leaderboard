@@ -6,9 +6,9 @@
     <solid
         android:color="#ffffff"/>
     <padding
-        android:top="@dimen/small_margin"
-        android:bottom="@dimen/small_margin"
-        android:left="@dimen/small_margin"
-        android:right="@dimen/small_margin"/>
+        android:top="@dimen/tiny_padding"
+        android:bottom="@dimen/tiny_padding"
+        android:left="@dimen/tiny_padding"
+        android:right="@dimen/tiny_padding"/>
 
 </shape>
