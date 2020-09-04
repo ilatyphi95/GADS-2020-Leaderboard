@@ -3,7 +3,7 @@
     <color name="colorPrimary">#181818</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#555555</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">@color/colorSecondaryDark</color>
     <color name="colorSecondary">#FAB70B</color>
     <color name="colorSecondaryDark">#fa9302</color>
     <color name="colorSecondaryLight">#facd2e</color>

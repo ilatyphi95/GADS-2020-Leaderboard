@@ -99,7 +99,7 @@
         android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/solid_button_enabled"
+        android:background="@drawable/button_selector"
         android:contentDescription="@string/submit_form"
         android:text="@string/submit"
         android:textAllCaps="false"

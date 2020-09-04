@@ -4,8 +4,10 @@
 
     <corners android:radius="@dimen/margin_normal"/>
     <stroke
-        android:width="@dimen/tiny_padding"
+        android:width="2dp"
         android:color="@color/pressed_grey"/>
+    <solid android:color="#FFFFFF"/>
+
     <padding
         android:top="@dimen/tiny_padding"
         android:bottom="@dimen/tiny_padding"
