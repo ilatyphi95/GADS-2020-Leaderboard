@@ -79,3 +79,15 @@ fun loadImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
+
+fun isValidName(name: String?) : Boolean {
+    return true
+}
+
+fun isValidEmail(password: String?) : Boolean {
+    return true
+}
+
+fun isValidGitHubLink(link: String?) : Boolean {
+    return true
+}
