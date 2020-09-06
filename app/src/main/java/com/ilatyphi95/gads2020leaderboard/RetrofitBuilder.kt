@@ -12,7 +12,7 @@ object RetrofitBuilder {
 
     private const val GET_BASE_URL = "https://gadsapi.herokuapp.com"
 
-    private const val POST_BASE_URL = ""
+    private const val POST_BASE_URL = "https://docs.google.com/forms/d/e/"
 
     private fun getRetrofit(baseUrl: String) : Retrofit {
         return Retrofit.Builder()
