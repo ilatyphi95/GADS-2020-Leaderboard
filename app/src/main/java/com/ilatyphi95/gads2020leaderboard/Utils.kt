@@ -81,13 +81,17 @@ fun loadImage(imgView: ImageView, imgUrl: String?) {
 }
 
 fun isValidName(name: String?) : Boolean {
-    return true
+    if(name == null) return false
+    val pattern = "(?i)[a-z]([- ',.a-z]{0,23}[a-z])?".toRegex()
+    return name.matches(pattern)
 }
 
-fun isValidEmail(password: String?) : Boolean {
-    return true
+fun isValidEmail(email: String?) : Boolean {
+    if(email == null) return false
+    val pattern = "^[A-Za-z0-9+_.-]+@(.+)$".toRegex()
+    return email.matches(pattern)
 }
 
 fun isValidGitHubLink(link: String?) : Boolean {
-    return true
+    return !link.isNullOrBlank()
 }
