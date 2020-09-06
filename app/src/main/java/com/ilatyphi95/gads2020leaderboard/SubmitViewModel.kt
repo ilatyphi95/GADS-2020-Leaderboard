@@ -3,8 +3,10 @@ package com.ilatyphi95.gads2020leaderboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import java.lang.IllegalArgumentException
 
-class SubmitViewModel : ViewModel() {
+class SubmitViewModel(private val postService: PostService) : ViewModel() {
     val firstName = MutableLiveData<String>()
     val lastName = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -19,18 +21,29 @@ class SubmitViewModel : ViewModel() {
         get() = _eventMessage
 
     fun submit() {
-        if(isValidFields()) {
+        if(validFields()) {
             _eventMessage.value = Event(R.string.project_submitted)
         } else {
             _eventMessage.value = Event(R.string.fill_all_fields)
         }
-
     }
 
     fun dataEdited() {
-        _submitEnabled.value = isValidFields()
+        _submitEnabled.value = validFields()
     }
 
-    private fun isValidFields() = isValidName(firstName.value) && isValidName(lastName.value)
+    private fun validFields() = isValidName(firstName.value) && isValidName(lastName.value)
             && isValidEmail(email.value) && isValidGitHubLink(projectLink.value)
+}
+
+@Suppress("UNCHECKED_CAST")
+class SubmitViewModelFactory(private val postService: PostService) :
+    ViewModelProvider.NewInstanceFactory() {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(SubmitViewModel::class.java)) {
+            return SubmitViewModel(postService) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }

@@ -1,5 +1,6 @@
 package com.ilatyphi95.gads2020leaderboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ class CollectorFragment() : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_collector, container, false)
+
+        binding.submit.setOnClickListener { startActivity(Intent(requireContext(), SubmitActivity::class.java)) }
 
         return binding.root
     }

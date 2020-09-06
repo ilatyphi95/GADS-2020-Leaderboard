@@ -14,4 +14,10 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="learning_leaders">Learning Leaders</string>
     <string name="iq_leaders">Skill IQ Leaders</string>
+    <string name="project_submitted">Project Submitted</string>
+    <string name="fill_all_fields">Fill all fields</string>
+    <string name="invalid_name">Invalid name</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_github_link">Invalid GitHub Link</string>
+    <string name="back_button">Back Button</string>
 </resources>
