@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/two_tone_gradient"
     tools:context=".MainActivity">
 
     <TextView
@@ -22,13 +22,13 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:contentDescription="@string/GADS_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gads_black" />
+        app:srcCompat="@drawable/ic_gads_bg_remove" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
