@@ -1,5 +1,6 @@
 package com.ilatyphi95.gads2020leaderboard
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,8 +33,31 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
         _submitEnabled.value = validFields()
     }
 
-    private fun validFields() = isValidName(firstName.value) && isValidName(lastName.value)
-            && isValidEmail(email.value) && isValidGitHubLink(projectLink.value)
+    private fun validFields(): Boolean {
+        if(isValidName(firstName.value)){
+            showMessage(R.string.invalid_first_name)
+            return false
+        }
+
+        if(isValidName(lastName.value)){
+            showMessage(R.string.invalid_last_name)
+            return false
+        }
+
+        if(isValidName(email.value)){
+            showMessage(R.string.invalid_email)
+            return false
+        }
+
+        if(isValidGitHubLink(firstName.value)){
+            showMessage(R.string.invalid_github_link)
+            return false
+        }
+
+        return true
+    }
+
+    private fun showMessage(@StringRes message: Int) { _eventMessage.value = Event(message) }
 }
 
 @Suppress("UNCHECKED_CAST")

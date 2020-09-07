@@ -20,4 +20,6 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_github_link">Invalid GitHub Link</string>
     <string name="back_button">Back Button</string>
+    <string name="invalid_first_name">Invalid First Name</string>
+    <string name="invalid_last_name">Invalid Last Name</string>
 </resources>
