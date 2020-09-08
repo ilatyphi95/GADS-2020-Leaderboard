@@ -1,14 +1,19 @@
 package com.ilatyphi95.gads2020leaderboard
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.ilatyphi95.gads2020leaderboard.databinding.ActivitySubmitBinding
+import kotlinx.coroutines.*
 
 class SubmitActivity : AppCompatActivity() {
 
@@ -53,11 +58,9 @@ class SubmitActivity : AppCompatActivity() {
 
             submit.observe(this@SubmitActivity, EventObserver{ submitted ->
                 if(submitted) {
-                    Toast.makeText(this@SubmitActivity, getString(R.string.submission_successful),
-                        Toast.LENGTH_LONG).show()
+                    showAlertDialog(R.layout.success_dialog_layout) { finish()}
                 } else {
-                    Toast.makeText(this@SubmitActivity, getString(R.string.submission_not_successful),
-                        Toast.LENGTH_LONG).show()
+                    showAlertDialog(R.layout.failure_dialog_layout) {}
                 }
             })
         }
@@ -69,5 +72,23 @@ class SubmitActivity : AppCompatActivity() {
         if (!evaluateFun(text.text.toString()) && !hasFocus) text.error =
             getString(errorMsg)
         else viewModel.dataEdited()
+    }
+
+    private fun showAlertDialog(@LayoutRes layout: Int, expression: () -> Unit) {
+        val alertDialog = AlertDialog.Builder(this@SubmitActivity)
+            .setView(layout)
+            .setOnDismissListener {
+                expression()
+            }
+            .create()
+
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            delay(3000)
+            if(alertDialog.isShowing){
+                alertDialog.dismiss()
+        } }
     }
 }

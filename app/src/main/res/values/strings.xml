@@ -24,4 +24,6 @@
     <string name="invalid_last_name">Invalid Last Name</string>
     <string name="submission_successful">Submission Successful</string>
     <string name="submission_not_successful">Submission not Successful</string>
+    <string name="image_failure">Image failure</string>
+    <string name="image_success">Image success</string>
 </resources>

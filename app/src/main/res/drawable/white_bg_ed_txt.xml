@@ -10,5 +10,4 @@
         android:bottom="@dimen/margin_smaller_normal"
         android:left="@dimen/small_margin"
         android:right="@dimen/small_margin"/>
-
 </shape>
