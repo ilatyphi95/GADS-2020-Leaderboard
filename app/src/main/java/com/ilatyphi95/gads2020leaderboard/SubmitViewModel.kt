@@ -1,17 +1,28 @@
 package com.ilatyphi95.gads2020leaderboard
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
+import kotlinx.coroutines.*
 
 class SubmitViewModel(private val postService: PostService) : ViewModel() {
+
+    private val uiScope = CoroutineScope(Job() + Dispatchers.Main)
     val firstName = MutableLiveData<String>()
     val lastName = MutableLiveData<String>()
     val email = MutableLiveData<String>()
     val projectLink = MutableLiveData<String>()
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean>
+        get() = _isLoading
+
+    private val _submit = MutableLiveData<Event<Boolean>>()
+    val submit : LiveData<Event<Boolean>>
+        get() = _submit
 
     private val _submitEnabled = MutableLiveData(false)
     val submitEnabled : LiveData<Boolean>
@@ -22,11 +33,35 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
         get() = _eventMessage
 
     fun submit() {
+
+
         if(validFields()) {
-            _eventMessage.value = Event(R.string.project_submitted)
+
+            uiScope.launch {
+                loading(true)
+                withContext(Dispatchers.IO) {
+                    try {
+                        testString()
+
+//                        postService.postProject(firstName.value!!, lastName.value!!,
+//                            email.value!!, projectLink.value!!)
+
+                        _submit.postValue(Event(true))
+                    } catch (exception: Exception) {
+                        _submit.postValue(Event(false))
+                        Log.d("SubmitViewModel", exception.message ?: "Error Occurred")
+                    }
+                }
+                loading(false)
+            }
         } else {
             _eventMessage.value = Event(R.string.fill_all_fields)
         }
+    }
+
+    private fun loading(isLoading: Boolean) {
+        _isLoading.postValue(isLoading)
+        _submitEnabled.postValue(!isLoading)
     }
 
     fun dataEdited() {
@@ -34,30 +69,18 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
     }
 
     private fun validFields(): Boolean {
-        if(isValidName(firstName.value)){
-            showMessage(R.string.invalid_first_name)
-            return false
-        }
-
-        if(isValidName(lastName.value)){
-            showMessage(R.string.invalid_last_name)
-            return false
-        }
-
-        if(isValidName(email.value)){
-            showMessage(R.string.invalid_email)
-            return false
-        }
-
-        if(isValidGitHubLink(firstName.value)){
-            showMessage(R.string.invalid_github_link)
-            return false
-        }
-
-        return true
+        return isValidName(firstName.value) && isValidName(lastName.value) &&
+                isValidEmail(email.value) && isValidGitHubLink(projectLink.value)
     }
 
-    private fun showMessage(@StringRes message: Int) { _eventMessage.value = Event(message) }
+    private fun showMessage(@StringRes message: Int) {
+        _eventMessage.postValue(Event(message))
+    }
+
+    private suspend fun testString() : Int {
+        delay(5000)
+        return R.string.project_submitted
+    }
 }
 
 @Suppress("UNCHECKED_CAST")

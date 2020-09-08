@@ -22,4 +22,6 @@
     <string name="back_button">Back Button</string>
     <string name="invalid_first_name">Invalid First Name</string>
     <string name="invalid_last_name">Invalid Last Name</string>
+    <string name="submission_successful">Submission Successful</string>
+    <string name="submission_not_successful">Submission not Successful</string>
 </resources>
