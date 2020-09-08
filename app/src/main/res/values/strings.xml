@@ -26,4 +26,8 @@
     <string name="submission_not_successful">Submission not Successful</string>
     <string name="image_failure">Image failure</string>
     <string name="image_success">Image success</string>
+    <string name="confirm_msg">Are you sure</string>
+    <string name="string_yes">Yes</string>
+    <string name="string_question">\?</string>
+    <string name="cancel_button">Cancel button</string>
 </resources>

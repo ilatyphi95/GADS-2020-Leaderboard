@@ -28,32 +28,19 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
     val submitEnabled : LiveData<Boolean>
         get() = _submitEnabled
 
+    private val _eventConfirmSubmission = MutableLiveData(Event(false))
+    val eventConfirmSubmission : LiveData<Event<Boolean>>
+        get() = _eventConfirmSubmission
+
     private val _eventMessage = MutableLiveData<Event<Int>>()
     val eventMessage : LiveData<Event<Int>>
         get() = _eventMessage
 
     fun submit() {
 
-
         if(validFields()) {
+            _eventConfirmSubmission.value = Event(true)
 
-            uiScope.launch {
-                loading(true)
-                withContext(Dispatchers.IO) {
-                    try {
-                        testString()
-
-//                        postService.postProject(firstName.value!!, lastName.value!!,
-//                            email.value!!, projectLink.value!!)
-
-                        _submit.postValue(Event(true))
-                    } catch (exception: Exception) {
-                        _submit.postValue(Event(false))
-                        Log.d("SubmitViewModel", exception.message ?: "Error Occurred")
-                    }
-                }
-                loading(false)
-            }
         } else {
             _eventMessage.value = Event(R.string.fill_all_fields)
         }
@@ -66,6 +53,27 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
 
     fun dataEdited() {
         _submitEnabled.value = validFields()
+    }
+
+    fun submissionConfirmed() {
+
+        uiScope.launch {
+            loading(true)
+            withContext(Dispatchers.IO) {
+                try {
+                    testString()
+
+//                        postService.postProject(firstName.value!!, lastName.value!!,
+//                            email.value!!, projectLink.value!!)
+
+                    _submit.postValue(Event(true))
+                } catch (exception: Exception) {
+                    _submit.postValue(Event(false))
+                    Log.d("SubmitViewModel", exception.message ?: "Error Occurred")
+                }
+            }
+            loading(false)
+        }
     }
 
     private fun validFields(): Boolean {

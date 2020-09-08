@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.ilatyphi95.gads2020leaderboard.databinding.ActivitySubmitBinding
+import com.ilatyphi95.gads2020leaderboard.databinding.ConfirmSubmitDialogBinding
 import kotlinx.coroutines.*
 
 class SubmitActivity : AppCompatActivity() {
@@ -58,9 +59,15 @@ class SubmitActivity : AppCompatActivity() {
 
             submit.observe(this@SubmitActivity, EventObserver{ submitted ->
                 if(submitted) {
-                    showAlertDialog(R.layout.success_dialog_layout) { finish()}
+                    showAlertDialog(R.layout.success_dialog_layout) { finish() }
                 } else {
                     showAlertDialog(R.layout.failure_dialog_layout) {}
+                }
+            })
+
+            eventConfirmSubmission.observe(this@SubmitActivity, EventObserver{ confirmed ->
+                if(confirmed) {
+                    showSubmitAlert { submissionConfirmed() }
                 }
             })
         }
@@ -90,5 +97,29 @@ class SubmitActivity : AppCompatActivity() {
             if(alertDialog.isShowing){
                 alertDialog.dismiss()
         } }
+    }
+
+    private fun showSubmitAlert(expression: () -> Unit) {
+        val binding = ConfirmSubmitDialogBinding
+            .inflate(this@SubmitActivity.layoutInflater, null, false)
+
+        val alertDialog = AlertDialog.Builder(this@SubmitActivity)
+            .setView(binding.root)
+            .setOnDismissListener {
+                expression()
+            }
+            .create()
+
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.show()
+
+        binding.cancel.setOnClickListener {
+            alertDialog.cancel()
+        }
+
+        binding.confirm.setOnClickListener {
+            expression()
+            alertDialog.cancel()
+        }
     }
 }
