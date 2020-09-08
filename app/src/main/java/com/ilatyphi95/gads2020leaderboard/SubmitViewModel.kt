@@ -52,7 +52,7 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
     }
 
     fun dataEdited() {
-        _submitEnabled.value = validFields()
+        _submitEnabled.postValue(validFields())
     }
 
     fun submissionConfirmed() {
