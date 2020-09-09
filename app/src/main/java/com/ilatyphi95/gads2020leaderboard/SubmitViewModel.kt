@@ -1,12 +1,14 @@
 package com.ilatyphi95.gads2020leaderboard
 
 import android.util.Log
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SubmitViewModel(private val postService: PostService) : ViewModel() {
 
@@ -60,34 +62,35 @@ class SubmitViewModel(private val postService: PostService) : ViewModel() {
         uiScope.launch {
             loading(true)
             withContext(Dispatchers.IO) {
-                try {
-                    testString()
 
-//                        postService.postProject(firstName.value!!, lastName.value!!,
-//                            email.value!!, projectLink.value!!)
+                postService.postProject(
+                    firstName.value!!, lastName.value!!,
+                    email.value!!, projectLink.value!!
+                ).enqueue(object : Callback<Void> {
 
-                    _submit.postValue(Event(true))
-                } catch (exception: Exception) {
-                    _submit.postValue(Event(false))
-                    Log.d("SubmitViewModel", exception.message ?: "Error Occurred")
-                }
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if(response.isSuccessful) {
+                            _submit.postValue(Event(true))
+                        } else {
+                            _submit.postValue(Event(false))
+                        }
+                        Log.d("SubmitViewModel", response.message() ?: "Error Occurred")
+                        loading(false)
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        _submit.postValue(Event(false))
+                        Log.d("SubmitViewModel", t.message ?: "Error Occurred")
+                        loading(false)
+                    }
+                })
             }
-            loading(false)
         }
     }
 
     private fun validFields(): Boolean {
         return isValidName(firstName.value) && isValidName(lastName.value) &&
                 isValidEmail(email.value) && isValidGitHubLink(projectLink.value)
-    }
-
-    private fun showMessage(@StringRes message: Int) {
-        _eventMessage.postValue(Event(message))
-    }
-
-    private suspend fun testString() : Int {
-        delay(5000)
-        return R.string.project_submitted
     }
 }
 
