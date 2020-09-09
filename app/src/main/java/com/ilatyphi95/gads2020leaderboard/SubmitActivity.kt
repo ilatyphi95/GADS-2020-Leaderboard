@@ -108,9 +108,6 @@ class SubmitActivity : AppCompatActivity() {
 
         val alertDialog = AlertDialog.Builder(this@SubmitActivity)
             .setView(binding.root)
-            .setOnDismissListener {
-                expression()
-            }
             .create()
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
